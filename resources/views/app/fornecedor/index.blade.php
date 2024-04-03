@@ -28,11 +28,14 @@ Status: {{ $fornecedores[0]['status'] }}
 
 <!-- Verifica se existe essa variavel e se está se definida -->
 @isset($fornecedores)
-	@isset($fornecedores[0]['cnpj'])
-	CNPJ : {{ $fornecedores[0]['cnpj'] }}
-	@endisset 	
+	CNPJ : {{ $fornecedores[0]['cnpj'] ?? 'dado não foi preenchido' }}
+	<!-- ?? o operador condicional default
+	$variavel testada não tiver definita (isset)
+	ou
+	$variavel testada possuir o valor null
+	  -->
 @endisset
-
+<br>
 @empty($fornecedores[0]['cnpj'])
 	$fornecedores[0]['cnpj'] está vazia!	
 @endempty
