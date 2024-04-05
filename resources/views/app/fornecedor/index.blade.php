@@ -39,3 +39,46 @@ Status: {{ $fornecedores[0]['status'] }}
 @empty($fornecedores[0]['cnpj'])
 	$fornecedores[0]['cnpj'] está vazia!	
 @endempty
+<br>
+<br>
+
+@forelse ($fornecedores as $indice => $fornecedor)
+	Iteração atual: {{ $loop->iteration }}
+<br>
+	Nome : {{ $fornecedor['nome'] ?? 'dado não foi preenchido' }} 
+<br>
+	Telefone: ({{ $fornecedor['ddd'] ?? '' }}) {{ $fornecedor['telefone'] ?? '' }}
+	
+	@switch($fornecedor['ddd'])
+		@case ('11')
+			São Paulo - SP
+			@break
+		@case ('32')
+			Juiz de Fora - MG
+			@break
+		@case ('85')
+			Fortaleza - CE
+			@break
+		@default
+			Estado não identificado
+	@endswitch
+<br>
+	Status : {{ $fornecedor['status'] ?? 'dado não foi preenchido' }}
+<br>
+	CNPJ : {{ $fornecedor['cnpj'] ?? 'dado não foi preenchido' }}
+<br>
+	@if($loop->first)
+		Primeira iteração do loop
+	@endif
+
+	@if($loop->last)
+		Ultima iteração do loop
+	@endif
+<br>
+	Total de registros: {{ $loop->count }}
+	<hr>
+@empty
+	Não existem fornecedores cadastrados!!!
+@endforelse
+
+
